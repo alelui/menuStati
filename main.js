@@ -9,11 +9,11 @@ document.querySelector('h1').innerHTML = offertaJson.stato[jIndex];
 
 function scrollOfferta() {
     const stati = offertaJson.stato;
+    if (jIndex >= stati.length - 1) { jIndex = 0; return }
     jIndex++;
-    // for (let i = 0; i < stati.length; i++) {
-
-    // }
 }
+
+function getIndiceStato() { return offertaJson.indiceStatoCorrente }
 
 document.querySelector('button').addEventListener('click', () => {
     scrollOfferta();
