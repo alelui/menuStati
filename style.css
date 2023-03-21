@@ -6,10 +6,38 @@
 
 h1{
     color: red;
+    text-align: center;
+    text-transform: capitalize;
 }
 
-
 .container{
+    width: 20%;
+    margin: 0 auto;
+    background-color: aquamarine;
+}
+
+.header{
+    height: 40px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: blue;
+}
+.main{
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+}
+.list{
+    width: 70%;
+}
+
+.active{
+    color: red;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+.display_none{
+    display: none;
 }

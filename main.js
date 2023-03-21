@@ -1,9 +1,12 @@
 'use strict'
 
 let offertaJson = {
-    stato: ["Bozza", "Inviata", "Vinta", "In Lavorazione", "Approvata", "Attesa", "contratti", "finanziari", "Da validare", "Completata"],
+    stato: ["bozza", "inviata", "vinta", "in lavorazione", "approvata", "attesa e contratti finanziari", "da validare", "completata"],
     indiceStatoCorrente: 0,
 }
+
+
+
 let jIndex = offertaJson.indiceStatoCorrente;
 document.querySelector('h1').innerHTML = offertaJson.stato[jIndex];
 
@@ -15,14 +18,57 @@ function scrollOfferta() {
 
 function getIndiceStato() { return offertaJson.indiceStatoCorrente }
 
-document.querySelector('button').addEventListener('click', () => {
+
+const changeBtn = document.querySelector('.change');
+changeBtn.addEventListener('click', () => {
     scrollOfferta();
     document.querySelector('h1').innerHTML = offertaJson.stato[jIndex];
+    changeState(offertaJson.indiceStatoCorrente);
 });
 
 
+const main = document.querySelector('.main');
+main.classList.add('display_none');
+let isVisibile = false;
+
+const showBtn = document.querySelector('.show');
+showBtn.addEventListener('click', () => {
+    changeVisibility()
+});
+
+function changeVisibility() {
+    if (isVisibile) {
+        main.classList.add('display_none');
+        isVisibile = false;
+    } else {
+        main.classList.remove('display_none');
+        isVisibile = true;
+    }
+}
+
+
 const container = document.querySelector('.container');
-const ul = container.querySelector('ul').innerHTML = fillList();
+const ul = container.querySelector('.list');
+ul.innerHTML = fillList();
+let list = ul.querySelectorAll('li');
+list[0].classList.add('active');
+
+
+function changeState(jIndex) {
+    const stati = offertaJson.stato;
+    if (jIndex == stati.length - 1) {
+        list[jIndex].classList.remove('active');
+        list[0].classList.add('active');
+        offertaJson.indiceStatoCorrente = 0;
+        return
+    }
+    if (jIndex < stati.length) {
+        list[jIndex].classList.remove('active');
+        jIndex++
+        list[jIndex].classList.add('active');
+        offertaJson.indiceStatoCorrente = jIndex;
+    }
+}
 
 
 function fillList() {
