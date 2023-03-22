@@ -15,6 +15,8 @@ const ul = container.querySelector('.list');
 ul.innerHTML = fillList();
 let list = ul.querySelectorAll('li');
 list[0].classList.add('active');
+let ball = document.querySelectorAll('.ball');
+ball[1].classList.add('circle_near_next');
 
 const main = document.querySelector('.main');
 main.classList.add('display_none');
@@ -48,7 +50,6 @@ function getIndiceStato() { return offertaJson.indiceStatoCorrente }
 
 function changeState(jIndex) {
     const stati = offertaJson.stato;
-    const ball = document.querySelectorAll('.ball');
     //Quando clicco sull'ultimo elemento, disabilito e nascondo bottone
     if (jIndex == stati.length - 2) {
         changeBtn.disabled = true;
@@ -56,10 +57,12 @@ function changeState(jIndex) {
     }
     if (jIndex < stati.length) {
         list[jIndex].classList.remove('active');
+        ball[jIndex + 1].classList.remove('circle_near_next');
         jIndex++
+        list[jIndex].classList.add('active');
         ball[jIndex].classList.remove('circle_next');
         ball[jIndex].classList.add('circle_past');
-        list[jIndex].classList.add('active');
+        ball[jIndex + 1].classList.add('circle_near_next');
         offertaJson.indiceStatoCorrente = jIndex;
     }
 }
