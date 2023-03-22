@@ -3,9 +3,12 @@
 let offertaJson = {
     stato: ["bozza", "inviata", "vinta", "in lavorazione", "approvata", "attesa e contratti finanziari", "da validare", "completata"],
     indiceStatoCorrente: 0,
+    getStato: function () { return this.indiceStatoCorrente },
+    setStato: function (num) { this.indiceStatoCorrente = num }
 }
 let jIndex = offertaJson.indiceStatoCorrente;
-document.querySelector('h1').innerHTML = offertaJson.stato[jIndex];
+const h2 = document.querySelector('h2');
+h2.innerHTML = offertaJson.stato[jIndex];
 
 const container = document.querySelector('.container');
 const ul = container.querySelector('.list');
@@ -21,7 +24,7 @@ let isVisibile = false;
 const changeBtn = document.querySelector('.change');
 changeBtn.addEventListener('click', () => {
     scrollOfferta();
-    document.querySelector('h1').innerHTML = offertaJson.stato[jIndex];
+    h2.innerHTML = offertaJson.stato[jIndex];
     changeState(offertaJson.indiceStatoCorrente);
 });
 
@@ -45,15 +48,20 @@ function getIndiceStato() { return offertaJson.indiceStatoCorrente }
 
 function changeState(jIndex) {
     const stati = offertaJson.stato;
-    if (jIndex == stati.length - 1) {
-        list[jIndex].classList.remove('active');
-        list[0].classList.add('active');
-        offertaJson.indiceStatoCorrente = 0;
-        return
+    const ball = document.querySelectorAll('.ball');
+    if (jIndex == stati.length - 2) {
+        /*         list[jIndex].classList.remove('active');
+                list[0].classList.add('active');
+                offertaJson.indiceStatoCorrente = 0;
+                return */
+        changeBtn.disabled = true;
+
     }
     if (jIndex < stati.length) {
         list[jIndex].classList.remove('active');
         jIndex++
+        ball[jIndex].classList.remove('circle_next');
+        ball[jIndex].classList.add('circle_past');
         list[jIndex].classList.add('active');
         offertaJson.indiceStatoCorrente = jIndex;
     }
@@ -62,8 +70,8 @@ function changeState(jIndex) {
 function fillList() {
     const stati = offertaJson.stato;
     let item = "";
-    stati.forEach(element => {
-        item += ` <li>${element}</li>`
+    stati.forEach((element, index) => {
+        item += ` <li><p class="ball ${index == 0 ? "circle_past" : "circle_next"}"></p>${element}</li>`
     });
     return item;
 }

@@ -4,10 +4,36 @@
     box-sizing: border-boxs;
 }
 
-h1{
-    color: red;
+li{
+    list-style: none;
+    line-height: 20px;
+    display: flex;
+    margin: 10px 0;
+}
+
+h1,h2{
     text-align: center;
-    text-transform: capitalize;
+    text-transform: uppercase;
+}
+h2{
+    color: red;
+}
+
+.circle_past{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: blue;
+    border: 5px solid yellow;
+    margin-right: 5px;
+}
+.circle_next{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: gainsboro;
+    border: 5px solid blue;
+    margin-right: 5px;
 }
 
 .container{
@@ -30,11 +56,12 @@ h1{
     padding: 10px 20px;
 }
 .list{
-    width: 70%;
+    width: 100%;
 }
 
 .active{
     color: red;
+    font-size: 20px;
     text-transform: capitalize;
     font-weight: bold;
 }
